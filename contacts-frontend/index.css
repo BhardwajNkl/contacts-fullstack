@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    background-color: azure;
+
+}
+
+#main-container{
+    width: 500px;
+    /* background-color: blueviolet; */
+    /* color: white; */
+    min-height: 100vh;
+    position: relative;
+}
+
+#new-contact-btn{
+    width: 100%;
+    font-size: 26px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.contact-container{
+    display: flex;
+    color: seagreen;
+    background-color: lightgoldenrodyellow;
+    margin-bottom: 5px;
+    padding: 2px;
+    border-radius: 5px;
+
+}
+
+.contact{
+    width: 420px;
+}
+
+.action-button-container{
+    width: 80px;
+    text-align: right;
+    font-size: 20px;
+    padding: 5px 5px 0 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.name{
+    font-size: 20px;
+}
+
+.mobile{
+    font-size: 15px;
+    padding-left: 4px;
+}
+
+form{
+    background-color: goldenrod;
+    width: 60%;
+    text-align: center;
+    padding: 4px;
+    border-radius: 5px;
+    position: absolute;
+    top: 10vh;
+    left: 20%;
+
+}
+
+label{
+    font-size: 20px;
+}
+input[name]{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+form button{
+    font-size: 20px;
+    padding: 4px;
+}
+
+.inactive{
+    display:none;
+}
+
+.active{
+    display: block;
+}

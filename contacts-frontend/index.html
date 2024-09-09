@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" lang="en-us">
+    <title>Contacts App</title>
+    
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div id="main-container">
+        <!--provide add contact button-->
+        <!--show contact list with update and delete icons-->
+        <!-- <div id="button-container">
+            </div> -->
+        <button id="new-contact-btn">+ Create Contact</button>
+        <div id="contact-list">
+            
+        </div>
+        <form id="new-contact-form" class="inactive">
+            <div>
+                <label>Name</label><br>
+                <input type="text" name="name" placeholder="Nikhil">
+            </div>
+            <div>
+                <label>Mobile</label><br>
+                <input type="text" name="mobile" placeholder="9900990099">
+            </div>
+            <div>
+                <button type="button" id="add-btn">Add</button> <button type="button" id="add-cancel-btn">Cancel</button>
+            </div>
+        </form>
+        <form id="update-contact-form" class="inactive">
+            <div>
+                <label>Name</label><br>
+                <input id="edit-name" type="text" name="name" placeholder="Nikhil">
+            </div>
+            <div>
+                <label>Mobile</label><br>
+                <input id="edit-mobile" type="text" name="mobile" placeholder="9900990099">
+            </div>
+            <div>
+                <button type="button" id="edit-btn">Update</button> <button type="button" id="edit-cancel-btn">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
