@@ -1,50 +1,58 @@
-version: '3'
 services:
   backend:
     build:
-      context: ./contacts-backend
+      context: ./contacts-backend # Backend build context. Backend source code and Dockerfile are present in this directory.
       dockerfile: Dockerfile
-    container_name: contacts_backend
+    container_name: backend
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/contacts_db
+      # Let's override the database configuration properties and use the mysql container being started by this compose file.
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/contacts_db # db is the name of mysql database service defined in this file.
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     healthcheck:
+      # Check if the app is fully up and responding.
+      # This check is used by frontend service. If the backend is up, only then our frontend will start.
       test: "wget --spider --quiet localhost:9090/api/contacts"
       interval: 5s
       timeout: 5s
       retries: 8
     depends_on:
+      # the backend service depends on database service(db)
       db:
-        condition: service_healthy
+        condition: service_healthy # This is to ensure that the database is up and running. Otherwise, backend should not start.
     ports:
-      - "9090:9090"
+      - "9090:9090" # mapping host port 9090 to backend container port 9090.
 
   frontend:
     build:
-      context: ./contacts-frontend
+      context: ./contacts-frontend # Frontend build context. Frontend source code and Dockerfile are present in this directory.
       dockerfile: Dockerfile
-    container_name: contacts_frontend
+    container_name: frontend
     depends_on:
+      # the frontend service depends on backend service.
       backend:
-        condition: service_healthy
+        condition: service_healthy # This is to ensure that the backend is up and running. Otherwise, frontend should not start.
     ports:
-      - "3000:80"
+      - "3000:80" # mapping host port 3000 to backend container port 80.
 
   db:
-    image: mysql
-    container_name: contacts_db
+    image: mysql # will pull the image from Docker Hub, if not available locally.
+    container_name: db
     environment:
+      # Let's set the root password for this MySQL database. Also, we are creating one required database at the time of start up.
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: contacts_db
     healthcheck:
+      # Check if MySQL is fully up.
+      # This check is used by backend service. If the db service is healthy, only then our backend will start.
       test: "mysql -h localhost -u root --password=root -e 'SELECT 1'"
       interval: 5s
       timeout: 5s
       retries: 8
     ports:
-      - "3306:3306"
+      - "3306:3306" # mapping host port 3306 to mysql container port 3306.
     volumes:
+      # let's define one volume so that the data of our database can be loaded back again and again across container up-downs.
       - db_data:/var/lib/mysql
 
 volumes:
